@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
     data: {
       userId: session.user.id,
       type: "COPY_REFRESH",
-      input: parsed.data as Prisma.InputJsonValue,
-      output: generatedContent as Prisma.InputJsonValue
+      input: parsed.data as unknown as Prisma.InputJsonValue,
+      output: generatedContent as unknown as Prisma.InputJsonValue
     }
   });
 

@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
       data: {
         userId: session.user.id,
         type: "BUSINESS_IDEA",
-        input: parsedIdeas.data as Prisma.InputJsonValue,
-        output: idea as Prisma.InputJsonValue
+        input: parsedIdeas.data as unknown as Prisma.InputJsonValue,
+        output: idea as unknown as Prisma.InputJsonValue
       }
     });
 
@@ -85,8 +85,8 @@ export async function POST(request: NextRequest) {
       userId: session.user.id,
       projectId: project.id,
       type: "STARTUP_LAUNCH_KIT",
-      input: mergedInput as Prisma.InputJsonValue,
-      output: { generatedContent, branding, seo } as Prisma.InputJsonValue
+      input: mergedInput as unknown as Prisma.InputJsonValue,
+      output: { generatedContent, branding, seo } as unknown as Prisma.InputJsonValue
     }
   });
 
