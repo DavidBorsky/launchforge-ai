@@ -1,4 +1,4 @@
-import { ProjectStatus, SubscriptionPlan, SubscriptionStatus } from "@prisma/client";
+import { Prisma, ProjectStatus, SubscriptionPlan, SubscriptionStatus } from "@prisma/client";
 import { buildMockAnalytics } from "@/data/mock";
 import { planLimits } from "@/data/plans";
 import { templateSeeds } from "@/data/templates";
@@ -89,7 +89,7 @@ export async function seedAnalyticsEvent(projectId: string) {
     data: {
       projectId,
       type: "page_view",
-      metadata: buildMockAnalytics(projectId)
+      metadata: buildMockAnalytics(projectId) as unknown as Prisma.InputJsonValue
     }
   });
 }
