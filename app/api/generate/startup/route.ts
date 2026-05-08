@@ -73,10 +73,10 @@ export async function POST(request: NextRequest) {
       pricingModel: mergedInput.pricingModel,
       brandingStyle: mergedInput.brandingStyle,
       status: ProjectStatus.GENERATED,
-      generatedContent,
-      branding,
-      seo,
-      analytics: buildMockAnalytics(mergedInput.businessName)
+      generatedContent: generatedContent as unknown as Prisma.InputJsonValue,
+      branding: branding as unknown as Prisma.InputJsonValue,
+      seo: seo as unknown as Prisma.InputJsonValue,
+      analytics: buildMockAnalytics(mergedInput.businessName) as unknown as Prisma.InputJsonValue
     }
   });
 
