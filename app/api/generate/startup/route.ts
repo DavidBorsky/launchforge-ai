@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { ProjectStatus } from "@prisma/client";
+import { Prisma, ProjectStatus } from "@prisma/client";
 import { NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { apiError, apiSuccess } from "@/lib/api";
@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
       data: {
         userId: session.user.id,
         type: "BUSINESS_IDEA",
-        input: parsedIdeas.data,
-        output: idea
+        input: parsedIdeas.data as Prisma.InputJsonValue,
+        output: idea as Prisma.InputJsonValue
       }
     });
 
@@ -85,8 +85,8 @@ export async function POST(request: NextRequest) {
       userId: session.user.id,
       projectId: project.id,
       type: "STARTUP_LAUNCH_KIT",
-      input: mergedInput,
-      output: { generatedContent, branding, seo }
+      input: mergedInput as Prisma.InputJsonValue,
+      output: { generatedContent, branding, seo } as Prisma.InputJsonValue
     }
   });
 

@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { Prisma } from "@prisma/client";
 import { NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { apiError, apiSuccess } from "@/lib/api";
@@ -26,8 +27,8 @@ export async function POST(request: NextRequest) {
     data: {
       userId: session.user.id,
       type: "COPY_REFRESH",
-      input: parsed.data,
-      output: generatedContent
+      input: parsed.data as Prisma.InputJsonValue,
+      output: generatedContent as Prisma.InputJsonValue
     }
   });
 
