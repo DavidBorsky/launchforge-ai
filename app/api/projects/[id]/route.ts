@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { Prisma, ProjectStatus } from "@prisma/client";
 import { NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { apiError, apiSuccess } from "@/lib/api";
@@ -38,9 +39,24 @@ export async function PATCH(
   const parsed = projectPatchSchema.safeParse(body);
   if (!parsed.success) return apiError("Invalid project update.");
 
+  const data: Prisma.ProjectUpdateInput = {
+    ...(parsed.data.name ? { name: parsed.data.name } : {}),
+    ...(parsed.data.status ? { status: parsed.data.status as ProjectStatus } : {}),
+    ...(parsed.data.generatedContent !== undefined
+      ? { generatedContent: parsed.data.generatedContent as Prisma.InputJsonValue }
+      : {}),
+    ...(parsed.data.branding !== undefined
+      ? { branding: parsed.data.branding as Prisma.InputJsonValue }
+      : {}),
+    ...(parsed.data.seo !== undefined ? { seo: parsed.data.seo as Prisma.InputJsonValue } : {}),
+    ...(parsed.data.analytics !== undefined
+      ? { analytics: parsed.data.analytics as Prisma.InputJsonValue }
+      : {})
+  };
+
   const updated = await prisma.project.update({
     where: { id },
-    data: parsed.data
+    data
   });
 
   return apiSuccess({ project: updated });
