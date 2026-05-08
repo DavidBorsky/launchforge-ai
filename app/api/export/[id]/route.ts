@@ -31,8 +31,9 @@ export async function GET(
     generatedContent: project.generatedContent as any,
     seo: project.seo as any
   });
+  const body = new Uint8Array(buffer);
 
-  return new NextResponse(buffer, {
+  return new NextResponse(body, {
     headers: {
       "Content-Type": "application/zip",
       "Content-Disposition": `attachment; filename="${project.name
