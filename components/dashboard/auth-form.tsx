@@ -68,7 +68,12 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
         {mode === "signup" ? <Input name="name" placeholder="Your name" required /> : null}
         <Input name="email" type="email" placeholder="you@example.com" required />
-        <Input name="password" type="password" placeholder="Create a password" required />
+        <Input
+          name="password"
+          type="password"
+          placeholder={mode === "login" ? "Enter your password" : "Create a password"}
+          required
+        />
         {error ? <p className="text-sm text-rose-600">{error}</p> : null}
         <Button type="submit" className="w-full">
           {loading ? "Please wait..." : mode === "login" ? "Log in" : "Create account"}
