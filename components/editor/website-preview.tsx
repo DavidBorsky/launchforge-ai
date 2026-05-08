@@ -28,12 +28,18 @@ export function WebsitePreview({
         <h1 className="mt-4 max-w-2xl text-4xl font-semibold leading-tight">{content.hero.headline}</h1>
         <p className="mt-4 max-w-2xl text-base text-white/80">{content.hero.subheadline}</p>
         <div className="mt-6 flex gap-3">
-          <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950">
+          <a
+            href="#get-started"
+            className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+          >
             {content.hero.ctaPrimary}
-          </button>
-          <button className="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white">
+          </a>
+          <a
+            href="#faq"
+            className="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
             {content.hero.ctaSecondary}
-          </button>
+          </a>
         </div>
       </div>
       <div className="space-y-8 px-8 py-8">
@@ -50,7 +56,7 @@ export function WebsitePreview({
             </div>
           ))}
         </section>
-        <section className="grid gap-4 md:grid-cols-2">
+        <section id="get-started" className="grid gap-4 md:grid-cols-2">
           {content.pricing.map((tier) => (
             <div key={tier.name} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
               <p className="text-sm font-medium opacity-70">{tier.name}</p>
@@ -64,7 +70,7 @@ export function WebsitePreview({
             </div>
           ))}
         </section>
-        <section className="grid gap-4 md:grid-cols-2">
+        <section id="faq" className="grid gap-4 md:grid-cols-2">
           {content.faq.map((faq) => (
             <div key={faq.question} className="rounded-3xl border border-slate-200 bg-white/80 p-5">
               <h3 className="font-semibold">{faq.question}</h3>
