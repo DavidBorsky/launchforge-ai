@@ -125,11 +125,27 @@ npx prisma studio
 
 ## Stripe Setup Notes
 
-- Billing architecture is scaffolded but intentionally mock-safe.
-- Placeholder routes:
+- Billing is wired for Stripe Checkout Sessions in test mode.
+- Required env vars for live test-mode billing:
+  - `STRIPE_SECRET_KEY`
+  - `STRIPE_WEBHOOK_SECRET`
+  - `STRIPE_PRICE_STARTER`
+  - `STRIPE_PRICE_PRO`
+  - `STRIPE_PRICE_AGENCY`
+- Create recurring Stripe Prices for Starter, Pro, and Agency in the Stripe dashboard, then paste those Price IDs into `.env`.
+- Use Stripe CLI during local development to forward webhooks:
+
+```bash
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+```
+
+- Test cards:
+  - `4242 4242 4242 4242` for a successful payment
+  - use any future expiration date and any CVC
+- Relevant routes:
   - [`app/api/stripe/checkout/route.ts`](/home/davidb/codes/launchforge-ai/app/api/stripe/checkout/route.ts)
   - [`app/api/stripe/webhook/route.ts`](/home/davidb/codes/launchforge-ai/app/api/stripe/webhook/route.ts)
-- Add live checkout session creation, webhook signature verification, and subscription syncing when real Stripe keys are available.
+- Subscription rows are updated from Stripe webhook events and reflected in the billing dashboard.
 
 ## Vercel Deployment Instructions
 
