@@ -43,14 +43,16 @@ export async function PATCH(
     ...(parsed.data.name ? { name: parsed.data.name } : {}),
     ...(parsed.data.status ? { status: parsed.data.status as ProjectStatus } : {}),
     ...(parsed.data.generatedContent !== undefined
-      ? { generatedContent: parsed.data.generatedContent as Prisma.InputJsonValue }
+      ? { generatedContent: parsed.data.generatedContent as unknown as Prisma.InputJsonValue }
       : {}),
     ...(parsed.data.branding !== undefined
-      ? { branding: parsed.data.branding as Prisma.InputJsonValue }
+      ? { branding: parsed.data.branding as unknown as Prisma.InputJsonValue }
       : {}),
-    ...(parsed.data.seo !== undefined ? { seo: parsed.data.seo as Prisma.InputJsonValue } : {}),
+    ...(parsed.data.seo !== undefined
+      ? { seo: parsed.data.seo as unknown as Prisma.InputJsonValue }
+      : {}),
     ...(parsed.data.analytics !== undefined
-      ? { analytics: parsed.data.analytics as Prisma.InputJsonValue }
+      ? { analytics: parsed.data.analytics as unknown as Prisma.InputJsonValue }
       : {})
   };
 

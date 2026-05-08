@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { ProjectStatus } from "@prisma/client";
 import { NextRequest } from "next/server";
 import { authOptions } from "@/lib/auth";
 import { apiError, apiSuccess } from "@/lib/api";
@@ -25,7 +26,7 @@ export async function PATCH(request: NextRequest) {
 
   const project = await prisma.project.update({
     where: { id: body.id },
-    data: { status: body.status }
+    data: { status: body.status as ProjectStatus }
   });
 
   return apiSuccess({ project });

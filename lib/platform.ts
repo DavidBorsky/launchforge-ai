@@ -14,7 +14,7 @@ export async function ensureTemplateSeeds() {
       category: template.category,
       description: template.description,
       previewImage: template.previewLabel,
-      config: template.config
+      config: template.config as unknown as Prisma.InputJsonValue
     }))
   });
 }
